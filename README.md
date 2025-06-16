@@ -8,18 +8,18 @@ Please download the data from and replace the corresponding file.
 
 Please use the following command to calculate the importance.
 
-'''python
+~~~
 
 python cal_rank.py
 
-'''
+~~~
 
 ## Denoising process
 
 Please use the following command to get the denoising result.
 
-'''python
+~~~
 
 python denoise.py
 
-'''
+~~~
