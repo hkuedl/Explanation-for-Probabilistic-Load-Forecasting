@@ -1,4 +1,7 @@
 # Explanation-for-Probabilistic-Load-Forecasting
+Codes for Paper "A Unified Explanation Framework for Probabilistic Load Forecasting via Feature Uncertainty Propagation".
+
+Authors: Zhixian Wang, Linxiao Yang, Chenxi Wang, Liang Sun, and Yi Wang.
 
 ## Add data
 
