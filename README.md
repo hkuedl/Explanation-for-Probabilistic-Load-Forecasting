@@ -10,7 +10,7 @@ Please use the following command to calculate the importance.
 
 ~~~
 
-python cal_rank.py -n 'GEF'
+python cal_rank.py -n 'Spain'
 
 ~~~
 
@@ -22,7 +22,7 @@ Please use the following command to get the denoising result.
 
 ~~~
 
-python denoise.py -n 'GEF'
+python denoise.py -n 'Spain'
 
 ~~~
 
