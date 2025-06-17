@@ -213,33 +213,25 @@ class TSMixerExt_SAE(nn.Module):
         return mu,sigma,x_extra_future
 
 def predict(model, test_X_hist,test_X_ex_hist,test_X_ex_fu,test_X_static, device, batch_size=256):
-    # 定义一个列表来保存预测结果和标准差
     preds = []
     sigmas = []
     
-    # 将模型放置在相应的设备上
     model = model.to(device)
 
-    # 确保模型处于评估模式
     model.eval()
 
-    # 循环预测
     for i in range(0, len(test_X_hist), batch_size):
-        # 获取批量数据
         batch_X_hist = test_X_hist[i:i+batch_size].to(device)
         batch_X_ex_hist = test_X_ex_hist[i:i+batch_size].to(device)
         batch_X_ex_fu = test_X_ex_fu[i:i+batch_size].to(device)
         batch_X_static = test_X_static[i:i+batch_size].to(device)
 
-        # 预测
         with torch.no_grad():
             pred, sigma, _ = model(batch_X_hist,batch_X_ex_hist,batch_X_ex_fu,batch_X_static)
 
-        # 将预测结果添加到列表
         preds.append(pred.detach().cpu())
         sigmas.append(sigma.detach().cpu())
 
-    # 将所有预测结果拼接在一起
     preds = torch.cat(preds, dim=0).cpu().detach().numpy()
     sigmas = torch.cat(sigmas, dim=0).cpu().detach().numpy()
 
@@ -253,23 +245,18 @@ def pinball_loss(y_true, y_pred_mean, y_pred_std, tau_list=[0.1,0.2,0.3,0.4,0.5,
 
     total_loss = 0
 
-    # 遍历所有的分位数
     for tau in tau_list:
         total_loss += single_pinball_loss(y_true, y_pred_mean, y_pred_std, tau)
 
-    # 取平均
     total_loss /= len(tau_list)
 
     return total_loss
 def replace_top_elements(testX_real, testX_fake, rank, number):
-    # 克隆testX_fake以避免修改原始值
     testX_real,testX_fake = testX_real.cpu().detach().numpy(),testX_fake.cpu().detach().numpy()
     testX_fake_modified = np.copy(testX_fake)
 
-    # 获取前number个最大值的索引
     top_indices = np.argsort(rank)[-number:]
     
-    # 将test_fake_modified的对应位置替换为test_real的对应位置
     if number ==0:
         pass
     else:
