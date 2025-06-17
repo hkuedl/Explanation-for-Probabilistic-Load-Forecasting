@@ -226,51 +226,45 @@ def cal_saliency(model, all_list,baseline,target_function, steps=50,batch_size=2
     train_X_hist,train_X_ex_hist,input_seq_list,train_X_static = all_list
     model.train()
     num_samples = input_seq_list.shape[0]
-    num_batches = (num_samples + batch_size - 1) // batch_size  # 计算需要多少个批次
+    num_batches = (num_samples + batch_size - 1) // batch_size  
     input_seq = torch.Tensor(input_seq_list)
     input_seq.requires_grad=True
     integrated_gradients = torch.zeros_like(input_seq)
     
     for batch_idx in range(num_batches):
-    # 计算当前批次的起始和结束索引
+
         start_idx = batch_idx * batch_size
         end_idx = min((batch_idx + 1) * batch_size, num_samples)
         
-        # 提取当前批次的数据
         input_seq_batch = input_seq[start_idx:end_idx]
         baseline_batch = baseline[start_idx:end_idx]
         train_X_hist_batch = train_X_hist[start_idx:end_idx]
         train_X_ex_hist_batch = train_X_ex_hist[start_idx:end_idx]
         train_X_static_batch = train_X_static[start_idx:end_idx]
         
-        # 初始化当前批次的归因值
+
         integrated_gradients_batch = torch.zeros_like(input_seq_batch)
         
-        # 计算步长
+
         step_size = (input_seq_batch - baseline_batch) / steps
         
-        # 对每个积分步进行迭代
+
         for i in range(steps):
-            # 计算当前步的输入
+
             current_input_data = baseline_batch + (i + 1) * step_size
             # current_input = torch.tensor(current_input_data, requires_grad=True)
             current_input = current_input_data.clone().detach().requires_grad_(True)
             
-            # 通过模型获取输出
             # output,sigma,hidden = model(current_input)
             output,sigma,_= model(train_X_hist_batch,train_X_ex_hist_batch,current_input,train_X_static_batch)
             
-            # 计算目标值
             target_value = target_function(sigma)
             # target_value = output[:,1]
             
-            # 计算当前步的梯度
             grads = torch.autograd.grad(torch.sum(target_value), current_input)[0]
             
-            # 更新累计归因值
             integrated_gradients_batch = integrated_gradients_batch +grads**2 
     
-        # 将当前批次的归因值存入结果张量中
         integrated_gradients[start_idx:end_idx] = torch.abs(integrated_gradients_batch)
     
     integrated_gradients = integrated_gradients
@@ -452,19 +446,15 @@ class TSMixerExt_SAE_attribute(nn.Module):
 def cal_captum(train_X_hist,train_X_ex_hist,train_X_ex_fu,train_X_static,model,function,batch_size = 64):
     setup_seed(1)
 
-    # 将数据分割成大小为 batch_size 的批次
     batches1 = torch.chunk(train_X_hist, train_X_hist.size(0) // batch_size + 1, dim=0)
     batches2 = torch.chunk(train_X_ex_hist, train_X_ex_hist.size(0) // batch_size + 1, dim=0)
     batches3 = torch.chunk(train_X_ex_fu, train_X_ex_fu.size(0) // batch_size + 1, dim=0)
     batches4 = torch.chunk(train_X_static, train_X_static.size(0) // batch_size + 1, dim=0)
 
-    # 使用 zip 函数将四个 batches 合并成一个新的 batches
     batches = zip(batches1, batches2, batches3, batches4)
 
-    # 初始化一个空的列表来保存结果
     results = []
     attribution_model = function(model)
-    # 对每个批次进行操作
     for batch in batches:
         input1, input2, input3, input4 = batch
         baseline3 = torch.zeros_like(input3).to(device)
@@ -475,7 +465,6 @@ def cal_captum(train_X_hist,train_X_ex_hist,train_X_ex_fu,train_X_static,model,f
         attribution_batch = torch.abs(attribution.squeeze(-1)).cpu().detach().numpy()
         results.append(attribution_batch)
 
-    # 将结果拼接起来
     final_result = np.concatenate(results, axis=0)
     return(final_result)
 
