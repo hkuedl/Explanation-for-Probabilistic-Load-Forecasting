@@ -5,7 +5,7 @@ Authors: Zhixian Wang, Linxiao Yang, Chenxi Wang, Liang Sun, and Yi Wang.
 
 ## Add data
 
-Please download the data in the [Cloud Drive](https://connecthkuhk-my.sharepoint.com/personal/u3009646_connect_hku_hk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fu3009646%5Fconnect%5Fhku%5Fhk%2FDocuments%2Fdata%2Fdata%2Fexplanation&ga=1) and put it in the root path.
+Please download the data in the [Cloud Drive](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/u3009646_connect_hku_hk/EoQK6vwviVtGlDlwzE7P7FoBNAvVKwyGZ-pFxJu0qMrmKg?e=s1G89D) and put it in the root path.
 
 ## Calculate the importance
 
