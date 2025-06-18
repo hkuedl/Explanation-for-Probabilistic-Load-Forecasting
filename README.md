@@ -29,4 +29,4 @@ python denoise.py -n 'Spain'
 
 ~~~
 
-Note that the name should be in ['Spain', 'Panama'].
+Note that the name should be in ['Spain', 'Panama']. Then you can get the result in the result folder.
