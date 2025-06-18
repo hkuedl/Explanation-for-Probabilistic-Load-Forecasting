@@ -3,6 +3,16 @@ Codes for Paper "A Unified Explanation Framework for Probabilistic Load Forecast
 
 Authors: Zhixian Wang, Linxiao Yang, Chenxi Wang, Liang Sun, and Yi Wang.
 
+## Create Environment
+
+Please use the following command to create the environment.
+
+~~~
+conda create --name exp python=3.8
+conda activate exp
+pip install -r requirements.txt
+~~~
+
 ## Add data
 
 Please download the data in the [Cloud Drive](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/u3009646_connect_hku_hk/EoQK6vwviVtGlDlwzE7P7FoBNAvVKwyGZ-pFxJu0qMrmKg?e=s1G89D) and put it in the root path.
