@@ -29,6 +29,7 @@ from captum.attr import (
     NeuronConductance,
     NoiseTunnel,
 )
+import os
 
 import argparse
 def mysigma(sigma):
@@ -470,8 +471,12 @@ def cal_captum(train_X_hist,train_X_ex_hist,train_X_ex_fu,train_X_static,model,f
 
 def main(args):
     setup_seed(1)
+    if not os.path.exists('./result'):
+        os.makedirs('./result')
     name = args.name
     device = args.device
+    if not os.path.exists('./result/'+name):
+        os.makedirs('./result/'+name)
     train_X_hist = torch.Tensor(np.load('./process_data/'+name+'/train_X_hist.npy')).to(device)
     val_X_hist = torch.Tensor(np.load('./process_data/'+name+'/val_X_hist.npy')).to(device)
     test_X_hist = torch.Tensor(np.load('./process_data/'+name+'/test_X_hist.npy')).to(device)
