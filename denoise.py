@@ -23,6 +23,7 @@ from layers import (
 from scipy.stats import norm
 import pickle
 import argparse
+import os 
 
 class SparseAutoEncoder(nn.Module):
     def __init__(self, input_size, hidden_size):
@@ -267,8 +268,12 @@ def replace_top_elements(testX_real, testX_fake, rank, number):
 
 
 def main(args):
+    if not os.path.exists('./result'):
+        os.makedirs('./result')
     name = args.name
     device = args.device
+    if not os.path.exists('./result/'+name):
+        os.makedirs('./result/'+name)
     for noise_type in tqdm(['oridinary','random','student']):
         setup_seed(1)
         test_X_hist = torch.Tensor(np.load('./process_data/'+name+'/test_X_hist.npy')).to(device)
