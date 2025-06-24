@@ -4,7 +4,7 @@ Codes for Paper "A Unified Explanation Framework for Probabilistic Load Forecast
 
 Authors: Zhixian Wang, Linxiao Yang, Chenxi Wang, Liang Sun, Fernando Porté-Agel, Yi Wang.
 
-## Down load the data
+## Download the data
 
 Please download the process_data in the cloud drive [Cloud Drive](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/u3009646_connect_hku_hk/EoQK6vwviVtGlDlwzE7P7FoBNAvVKwyGZ-pFxJu0qMrmKg?e=CadPtZ) (./Explanation/process_data) and place them in the root path.
 
