@@ -12,9 +12,9 @@ Please download the data in the cloud drive [Cloud Drive](https://connecthkuhk-m
 
 Please use the following command to calculate the feature importance.
 
-'''
+~~~
 python cal_rank.py -n Spain
-'''
+~~~
 
 Please note that the dataset name should be in ['Spain','Panama'].
 
@@ -23,8 +23,8 @@ Please note that the dataset name should be in ['Spain','Panama'].
 
 Please use the following command to get the denoise result.
 
-'''
+~~~
 python denoise.py -n Spain -u False
-'''
+~~~
 
 Please note that the dataset name should be in ['Spain','Panama'] and use -u True to apply to low-pass filter.
