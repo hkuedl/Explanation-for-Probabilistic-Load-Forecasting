@@ -19,7 +19,7 @@ python cal_rank.py -n Spain
 Please note that the dataset name should be in ['Spain','Panama'].
 
 
-## Calculate the importance
+## Denoising process
 
 Please use the following command to get the denoise result.
 
